@@ -7,16 +7,18 @@ import java.util.Stack;
 public class MaquinaDePila {
     
     private int contadorDePrograma;
-    private ArrayList  memoria;
-    private Stack pila;
-    private TablaDeSimbolos tabla;
-    private boolean stop = false;
-    private boolean returning = false;
-    private Stack<Marco> pilaDeMarcos;
+    private final ArrayList  memoria;
+    private final Stack pila;
+    private final TablaDeSimbolos tabla;
+    private boolean stop;
+    private boolean returning;
+    private final Stack<Marco> pilaDeMarcos;
     
     public MaquinaDePila(TablaDeSimbolos tabla){
+        this.returning = false;
+        this.stop = false;
         contadorDePrograma = 0;
-        memoria = new ArrayList<Method>();
+        memoria = new ArrayList<>();
         pila = new Stack();
         this.tabla = tabla;
         pilaDeMarcos = new Stack();
@@ -30,10 +32,10 @@ public class MaquinaDePila {
     public int agregarOperacion(String nombre){
         int posicion = memoria.size();
         try{
-            memoria.add(this.getClass().getDeclaredMethod(nombre, null));
+            memoria.add(this.getClass().getDeclaredMethod(nombre, (Class<?>) null));
             return posicion;
         }
-        catch(Exception e ){
+        catch(NoSuchMethodException | SecurityException e ){
             System.out.println("Error al agregar operación " + nombre + ". ");
         }
         return -1;
@@ -52,9 +54,9 @@ public class MaquinaDePila {
     
     public int agregarOperacionEn(String nombre, int posicion){
         try{
-            memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, null));
+            memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, (Class<?>) null));
         }
-        catch(Exception e ){
+        catch(NoSuchMethodException | SecurityException e ){
             System.out.println("Error al agregar operación " + nombre + ". ");
         }
         return posicion;
@@ -339,7 +341,7 @@ public class MaquinaDePila {
             Object objetoLeido = memoria.get(indice);
             if(objetoLeido instanceof Method){
                 Method metodo = (Method)objetoLeido;
-                metodo.invoke(this, null);
+                metodo.invoke(this, (Object) null);
             }
             if(objetoLeido instanceof Funcion){
                 Funcion funcion = (Funcion)objetoLeido;
@@ -347,7 +349,7 @@ public class MaquinaDePila {
             }
             contadorDePrograma++;
         }
-        catch(Exception e){}
+        catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e){}
     }
     
     public static class Imprimir implements Funcion{
