@@ -1,4 +1,3 @@
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ public class MaquinaDePila {
         int posicion = memoria.size();
         try{
             memoria.add(this.getClass().getDeclaredMethod(nombre, null));  
-            //memoria.add(this.getClass().getDeclaredMethod(nombre, (Class<?>[]) null));
             return posicion;
         }
         catch(Exception e ){
@@ -54,7 +52,6 @@ public class MaquinaDePila {
     public int agregarOperacionEn(String nombre, int posicion){
         try{
             memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, null));
-            //memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, (Class<?>[]) null));
         }
         catch(Exception e ){
             System.out.println("Error al agregar operación " + nombre + ". ");
@@ -342,7 +339,6 @@ public class MaquinaDePila {
             if(objetoLeido instanceof Method){
                 Method metodo = (Method)objetoLeido;
                 metodo.invoke(this, null);
-                //metodo.invoke(this, (Object[]) null);
             }
             if(objetoLeido instanceof Funcion){
                 Funcion funcion = (Funcion)objetoLeido;
@@ -380,7 +376,6 @@ public class MaquinaDePila {
         @Override
         public Object ejecutar(Object A) {
             return ((Matriz)A).sumaDeComponentes();
-            //return MtrxOp.sumaDeComponentes((Matriz)A);
         }
         
     }
