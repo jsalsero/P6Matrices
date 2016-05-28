@@ -1,6 +1,6 @@
 public class MtrxOp{
 
-public static Matriz multiplicacion(Matriz matrizA, Matriz matrizB){
+    public static Matriz multiplicacion(Matriz matrizA, Matriz matrizB){
         double[][] A = matrizA.getNumeros();
         double[][] B = matrizB.getNumeros();
         double[][] C = new double[0][0];
@@ -28,20 +28,20 @@ public static Matriz multiplicacion(Matriz matrizA, Matriz matrizB){
         return matrizB;
     }    
     
-    public static Matriz suma(Matriz matrizA, Matriz matrizB){
-        double[][] A = matrizA.getNumeros();
-        double[][] B = matrizB.getNumeros();
-        double[][] C = new double[0][0];
-        if(A.length == B.length && A.length > 0)
-            if(A[0].length == B[0].length){
-                C = new double[A.length][A[0].length];
-                for(int i = 0; i <A.length; i++)
-                    for(int j = 0; j<A[0].length; j++)
-                        C[i][j] = A[i][j]+B[i][j];
-            }
-        Matriz matrizC = new Matriz(C);
-        return matrizC;
-    }
+//    public static Matriz suma(Matriz matrizA, Matriz matrizB){
+//        double[][] A = matrizA.getNumeros();
+//        double[][] B = matrizB.getNumeros();
+//        double[][] C = new double[0][0];
+//        if(A.length == B.length && A.length > 0)
+//            if(A[0].length == B[0].length){
+//                C = new double[A.length][A[0].length];
+//                for(int i = 0; i <A.length; i++)
+//                    for(int j = 0; j<A[0].length; j++)
+//                        C[i][j] = A[i][j]+B[i][j];
+//            }
+//        Matriz matrizC = new Matriz(C);
+//        return matrizC;
+//    }
     
     public static Matriz resta(Matriz matrizA, Matriz matrizB){
         double[][] A = matrizA.getNumeros();

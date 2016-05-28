@@ -67,7 +67,7 @@ public class MaquinaDePila {
         Object matriz2 = pila.pop();
         Object matriz1 = pila.pop();
         if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push(MtrxOp.suma((Matriz)matriz1, (Matriz)matriz2));
+            pila.push( ((Matriz)matriz1).suma((Matriz)matriz2) );
         else 
             pila.push((double)matriz1 + (double)matriz2);
     }
