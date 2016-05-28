@@ -7,18 +7,16 @@ import java.util.Stack;
 public class MaquinaDePila {
     
     private int contadorDePrograma;
-    private final ArrayList  memoria;
-    private final Stack pila;
-    private final TablaDeSimbolos tabla;
-    private boolean stop;
-    private boolean returning;
-    private final Stack<Marco> pilaDeMarcos;
+    private ArrayList  memoria;
+    private Stack pila;
+    private TablaDeSimbolos tabla;
+    private boolean stop = false;
+    private boolean returning = false;
+    private Stack<Marco> pilaDeMarcos;
     
     public MaquinaDePila(TablaDeSimbolos tabla){
-        this.returning = false;
-        this.stop = false;
         contadorDePrograma = 0;
-        memoria = new ArrayList<>();
+        memoria = new ArrayList<Method>();
         pila = new Stack();
         this.tabla = tabla;
         pilaDeMarcos = new Stack();
@@ -32,10 +30,11 @@ public class MaquinaDePila {
     public int agregarOperacion(String nombre){
         int posicion = memoria.size();
         try{
-            memoria.add(this.getClass().getDeclaredMethod(nombre, (Class<?>) null));
+            memoria.add(this.getClass().getDeclaredMethod(nombre, null));  
+            //memoria.add(this.getClass().getDeclaredMethod(nombre, (Class<?>[]) null));
             return posicion;
         }
-        catch(NoSuchMethodException | SecurityException e ){
+        catch(Exception e ){
             System.out.println("Error al agregar operación " + nombre + ". ");
         }
         return -1;
@@ -54,9 +53,10 @@ public class MaquinaDePila {
     
     public int agregarOperacionEn(String nombre, int posicion){
         try{
-            memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, (Class<?>) null));
+            memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, null));
+            //memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, (Class<?>[]) null));
         }
-        catch(NoSuchMethodException | SecurityException e ){
+        catch(Exception e ){
             System.out.println("Error al agregar operación " + nombre + ". ");
         }
         return posicion;
@@ -85,7 +85,7 @@ public class MaquinaDePila {
         Object matriz2 = pila.pop();
         Object matriz1 = pila.pop();
         if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push(MtrxOp.multiplicacion((Matriz)matriz1, (Matriz)matriz2));
+            pila.push( ((Matriz)matriz1).multiplicacion((Matriz)matriz2) );
         else 
             pila.push((double)matriz1 * (double)matriz2);
     }
@@ -341,7 +341,8 @@ public class MaquinaDePila {
             Object objetoLeido = memoria.get(indice);
             if(objetoLeido instanceof Method){
                 Method metodo = (Method)objetoLeido;
-                metodo.invoke(this, (Object) null);
+                metodo.invoke(this, null);
+                //metodo.invoke(this, (Object[]) null);
             }
             if(objetoLeido instanceof Funcion){
                 Funcion funcion = (Funcion)objetoLeido;
@@ -349,7 +350,7 @@ public class MaquinaDePila {
             }
             contadorDePrograma++;
         }
-        catch(IllegalAccessException | IllegalArgumentException | InvocationTargetException e){}
+        catch(Exception e){}
     }
     
     public static class Imprimir implements Funcion{
