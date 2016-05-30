@@ -60,42 +60,7 @@ public class MaquinaDePila {
     }
     
     //Funciones que la máquina ejecuta sobre la pila
-    private void sumar(){
-        Object matriz2 = pila.pop();
-        Object matriz1 = pila.pop();
-        if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push( ((Matriz)matriz1).suma((Matriz)matriz2) );
-        else 
-            pila.push((double)matriz1 + (double)matriz2);
-    }
-    
-    private void restar(){
-        Object matriz2 = pila.pop();
-        Object matriz1 = pila.pop();
-        if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push( ((Matriz)matriz1).resta((Matriz)matriz2) );
-        else 
-            pila.push((double)matriz1 - (double)matriz2);
-    }
-    
-    private void imag() {
-        
-    }
-    
-    private void unaryminus() {
-        
-    }
-    
-    private void multiplicar(){
-        Object matriz2 = pila.pop();
-        Object matriz1 = pila.pop();
-        if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push( ((Matriz)matriz1).multiplicacion((Matriz)matriz2) );
-        else 
-            pila.push((double)matriz1 * (double)matriz2);
-    }
-    
-    private void constPush(){
+        private void constPush(){
         pila.push(memoria.get(++contadorDePrograma));
     }
     
@@ -113,6 +78,44 @@ public class MaquinaDePila {
         tabla.insertar(variable, objeto);
     }
     
+    private void sumar(){
+        Object com1 = pila.pop();
+        Object com2 = pila.pop();
+        if(com1 instanceof Complejo && com2 instanceof Complejo)
+            pila.push( ((Complejo)com1).suma((Complejo)com2) );
+        else 
+            pila.push((double)com1 + (double)com2);
+    }
+    
+    private void restar(){
+         Object com1 = pila.pop();
+        Object com2 = pila.pop();
+        if(com1 instanceof Complejo && com2 instanceof Complejo)
+            pila.push( ((Complejo)com1).resta((Complejo)com2) );
+        else 
+            pila.push((double)com1 - (double)com2);
+    }
+    
+    private void imag() {
+        Object com1 = pila.pop();
+        if (com1 instanceof Complejo) {
+            pila.push(((Complejo) com1).multiplicacion(new Complejo(0, 1)));
+        }
+    }
+    
+    private void unaryminus() {
+        
+    }
+    
+    private void multiplicar(){
+        Object matriz2 = pila.pop();
+        Object matriz1 = pila.pop();
+        if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
+            pila.push( ((Matriz)matriz1).multiplicacion((Matriz)matriz2) );
+        else 
+            pila.push((double)matriz1 * (double)matriz2);
+    }
+       
     private void comparar() {
         
     }
