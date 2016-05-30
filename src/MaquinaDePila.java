@@ -81,6 +81,11 @@ public class MaquinaDePila {
     private void imag() {
         
     }
+    
+    private void unaryminus() {
+        
+    }
+    
     private void multiplicar(){
         Object matriz2 = pila.pop();
         Object matriz1 = pila.pop();
