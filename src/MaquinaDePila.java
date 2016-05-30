@@ -113,7 +113,15 @@ public class MaquinaDePila {
         tabla.insertar(variable, objeto);
     }
     
-    private void comparar(){
+    private void comparar() {
+        
+    }
+    
+    private void compararNot() {
+        
+    }
+    
+    private void mag_comparar(){
         Object A = pila.pop();
         Object B = pila.pop();
         if((A instanceof Matriz) && (B instanceof Matriz))
@@ -122,7 +130,7 @@ public class MaquinaDePila {
             pila.push((boolean)((double)A==(double)B));
     }
 
-    private void compararNot(){
+    private void mag_compararNot(){
         Object A = pila.pop();
         Object B = pila.pop();
         if((A instanceof Matriz) && (B instanceof Matriz))
