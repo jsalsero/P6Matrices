@@ -77,7 +77,10 @@ public class MaquinaDePila {
         else 
             pila.push((double)matriz1 - (double)matriz2);
     }
-
+    
+    private void imag() {
+        
+    }
     private void multiplicar(){
         Object matriz2 = pila.pop();
         Object matriz1 = pila.pop();
