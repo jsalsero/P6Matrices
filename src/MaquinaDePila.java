@@ -1,4 +1,3 @@
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ public class MaquinaDePila {
         int posicion = memoria.size();
         try{
             memoria.add(this.getClass().getDeclaredMethod(nombre, null));  
-            //memoria.add(this.getClass().getDeclaredMethod(nombre, (Class<?>[]) null));
             return posicion;
         }
         catch(Exception e ){
@@ -54,7 +52,6 @@ public class MaquinaDePila {
     public int agregarOperacionEn(String nombre, int posicion){
         try{
             memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, null));
-            //memoria.add(posicion, this.getClass().getDeclaredMethod(nombre, (Class<?>[]) null));
         }
         catch(Exception e ){
             System.out.println("Error al agregar operación " + nombre + ". ");
@@ -67,7 +64,7 @@ public class MaquinaDePila {
         Object matriz2 = pila.pop();
         Object matriz1 = pila.pop();
         if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push(MtrxOp.suma((Matriz)matriz1, (Matriz)matriz2));
+            pila.push( ((Matriz)matriz1).suma((Matriz)matriz2) );
         else 
             pila.push((double)matriz1 + (double)matriz2);
     }
@@ -76,11 +73,19 @@ public class MaquinaDePila {
         Object matriz2 = pila.pop();
         Object matriz1 = pila.pop();
         if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push(MtrxOp.resta((Matriz)matriz1, (Matriz)matriz2));
+            pila.push( ((Matriz)matriz1).resta((Matriz)matriz2) );
         else 
             pila.push((double)matriz1 - (double)matriz2);
     }
-
+    
+    private void imag() {
+        
+    }
+    
+    private void unaryminus() {
+        
+    }
+    
     private void multiplicar(){
         Object matriz2 = pila.pop();
         Object matriz1 = pila.pop();
@@ -112,7 +117,7 @@ public class MaquinaDePila {
         Object A = pila.pop();
         Object B = pila.pop();
         if((A instanceof Matriz) && (B instanceof Matriz))
-            pila.push(MtrxOp.comparar((Matriz)A, (Matriz)B));
+            pila.push( ((Matriz)A).comparar((Matriz)B) );
         else
             pila.push((boolean)((double)A==(double)B));
     }
@@ -121,7 +126,7 @@ public class MaquinaDePila {
         Object A = pila.pop();
         Object B = pila.pop();
         if((A instanceof Matriz) && (B instanceof Matriz))
-            pila.push(!MtrxOp.comparar((Matriz)A, (Matriz)B));
+            pila.push( !((Matriz)A).comparar((Matriz)B) );
         else
             pila.push((double)A!=(double)B);
     }
@@ -132,8 +137,8 @@ public class MaquinaDePila {
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
         if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = MtrxOp.sumaDeComponentes((Matriz)A);
-            b = MtrxOp.sumaDeComponentes((Matriz)B);
+            a = ((Matriz)A).sumaDeComponentes();
+            b = ((Matriz)B).sumaDeComponentes();
         }            
         else{
             a = (double)A;
@@ -148,8 +153,8 @@ public class MaquinaDePila {
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
         if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = MtrxOp.sumaDeComponentes((Matriz)A);
-            b = MtrxOp.sumaDeComponentes((Matriz)B);
+            a = ((Matriz)A).sumaDeComponentes();
+            b = ((Matriz)B).sumaDeComponentes();
         }            
         else{
             a = (double)A;
@@ -164,8 +169,8 @@ public class MaquinaDePila {
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
         if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = MtrxOp.sumaDeComponentes((Matriz)A);
-            b = MtrxOp.sumaDeComponentes((Matriz)B);
+            a = ((Matriz)A).sumaDeComponentes();
+            b = ((Matriz)B).sumaDeComponentes();
         }            
         else{
             a = (double)A;
@@ -180,8 +185,8 @@ public class MaquinaDePila {
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
         if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = MtrxOp.sumaDeComponentes((Matriz)A);
-            b = MtrxOp.sumaDeComponentes((Matriz)B);
+            a = ((Matriz)A).sumaDeComponentes();
+            b = ((Matriz)B).sumaDeComponentes();
         }            
         else{
             a = (double)A;
@@ -342,7 +347,6 @@ public class MaquinaDePila {
             if(objetoLeido instanceof Method){
                 Method metodo = (Method)objetoLeido;
                 metodo.invoke(this, null);
-                //metodo.invoke(this, (Object[]) null);
             }
             if(objetoLeido instanceof Funcion){
                 Funcion funcion = (Funcion)objetoLeido;
@@ -369,7 +373,7 @@ public class MaquinaDePila {
 
         @Override
         public Object ejecutar(Object A) {
-            Matriz invertida = MtrxOp.invierte((Matriz)A);
+            Matriz invertida = ((Matriz)A).invierte();
             return invertida;
         }
         
@@ -379,7 +383,7 @@ public class MaquinaDePila {
 
         @Override
         public Object ejecutar(Object A) {
-            return MtrxOp.sumaDeComponentes((Matriz)A);
+            return ((Matriz)A).sumaDeComponentes();
         }
         
     }
