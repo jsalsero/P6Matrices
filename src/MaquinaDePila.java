@@ -75,6 +75,8 @@ public class MaquinaDePila {
     private void asignar(){
         String variable = (String)pila.pop();
         Object objeto = pila.pop();
+        //System.out.println("asig " + variable);
+        //System.out.println("asig " + (Complejo)objeto);        
         tabla.insertar(variable, objeto);
     }
     
@@ -88,7 +90,7 @@ public class MaquinaDePila {
     }
     
     private void restar(){
-        System.out.println("resta");
+        //System.out.println("resta");
         Object com2 = pila.pop();
         Object com1 = pila.pop();
         if(com1 instanceof Complejo && com2 instanceof Complejo)
@@ -100,13 +102,13 @@ public class MaquinaDePila {
     private void imag() {
         Object com1 = pila.pop();
         if (com1 instanceof Complejo) {
-            System.out.println(((Complejo) com1).multiplicacion(new Complejo(0, 1)));
+            //System.out.println(((Complejo) com1).multiplicacion(new Complejo(0, 1)));
             pila.push(((Complejo) com1).multiplicacion(new Complejo(0, 1)));
         }
     }
     
     private void unaryminus() {
-        System.out.println("unaryminus");
+        //System.out.println("unaryminus");
         Object com1 = pila.pop();
         if (com1 instanceof Complejo)
             com1 = new Complejo().resta((Complejo)com1);
@@ -153,13 +155,13 @@ public class MaquinaDePila {
         Object A = pila.pop();
         Object B = pila.pop();
         if((A instanceof Complejo) && (B instanceof Complejo))
-            pila.push( !((Complejo)A).mag_comparaNot((Complejo)B) );
+            pila.push( ((Complejo)A).mag_comparaNot((Complejo)B) );
         else
             pila.push((double)A != (double)B);
     }
 
     private void menor(){
-        System.out.println("menor");
+        //System.out.println("menor");
         double a;
         double b;
         Object B = pila.pop();
@@ -285,7 +287,7 @@ public class MaquinaDePila {
         boolean continua = true;
         while(continua && !returning){
             ejecutar((int)memoria.get(condicion+1)); //evaluamos la condición        
-            if((boolean)pila.pop()){ //lee el resultado de la condición de la pila
+            if((boolean)pila.pop()){ //lee el resultado de la condición de la pila                
                 ejecutar((int)memoria.get(condicion+3));//Ejecuta el cuerpo
                 ejecutar((int)memoria.get(condicion+2));//Ejecuta la última parte del for
             }

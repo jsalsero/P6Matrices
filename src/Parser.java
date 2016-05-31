@@ -523,7 +523,7 @@ int yylex(){
 	else {
 		tok = s.charAt(0);
 	}
-	System.out.println("Token: " + s.charAt(0));
+	//System.out.println("Token: " + s.charAt(0));
 	return tok;
 }
 
@@ -854,14 +854,14 @@ case 25:
 //#line 125 "p.y"
 {
 				 maquina.agregarOperacion("mag_comparar");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 26:
 //#line 129 "p.y"
 {
 				 maquina.agregarOperacion("mag_compararNot");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 27:
@@ -869,42 +869,42 @@ case 27:
 {
 				System.out.println("ymenor");
 				 maquina.agregarOperacion("menor");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 28:
 //#line 138 "p.y"
 {
 				 maquina.agregarOperacion("menorIgual");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 29:
 //#line 142 "p.y"
 {
 				 maquina.agregarOperacion("mayor");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 30:
 //#line 146 "p.y"
 {
 				 maquina.agregarOperacion("mayorIgual");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 31:
 //#line 150 "p.y"
 {
 				maquina.agregarOperacion("and");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 32:
 //#line 154 "p.y"
 {
 				maquina.agregarOperacion("or");
-				 yyval = val_peek(6);
+				 yyval = val_peek(5);
 			}
 break;
 case 33:
