@@ -97,8 +97,10 @@ public class MaquinaDePila {
     }
     
     private void imag() {
+        System.out.println("imag");
         Object com1 = pila.pop();
         if (com1 instanceof Complejo) {
+            System.out.println(((Complejo) com1).multiplicacion(new Complejo(0, 1)));
             pila.push(((Complejo) com1).multiplicacion(new Complejo(0, 1)));
         }
     }
@@ -108,38 +110,48 @@ public class MaquinaDePila {
     }
     
     private void multiplicar(){
-        Object matriz2 = pila.pop();
-        Object matriz1 = pila.pop();
-        if(matriz1 instanceof Matriz && matriz2 instanceof Matriz)
-            pila.push( ((Matriz)matriz1).multiplicacion((Matriz)matriz2) );
+        Object com2 = pila.pop();
+        Object com1 = pila.pop();
+        if(com1 instanceof Complejo && com2 instanceof Complejo)
+            pila.push( ((Complejo)com1).multiplicacion((Complejo)com2) );
         else 
-            pila.push((double)matriz1 * (double)matriz2);
+            pila.push((double)com1 * (double)com2);
     }
        
     private void comparar() {
-        
+        Object A = pila.pop();
+        Object B = pila.pop();
+        if((A instanceof Complejo) && (B instanceof Complejo))
+            pila.push( ((Complejo)A).compara((Complejo)B) );
+        else
+            pila.push((boolean)((double)A == (double)B));
     }
     
     private void compararNot() {
-        
+        Object A = pila.pop();
+        Object B = pila.pop();
+        if((A instanceof Complejo) && (B instanceof Complejo))
+            pila.push( ((Complejo)A).comparaNot((Complejo)B) );
+        else
+            pila.push((boolean)((double)A != (double)B));
     }
     
     private void mag_comparar(){
         Object A = pila.pop();
         Object B = pila.pop();
-        if((A instanceof Matriz) && (B instanceof Matriz))
-            pila.push( ((Matriz)A).comparar((Matriz)B) );
+        if((A instanceof Complejo) && (B instanceof Complejo))
+            pila.push( ((Complejo)A).mag_compara((Complejo)B) );
         else
-            pila.push((boolean)((double)A==(double)B));
+            pila.push((boolean)((double)A == (double)B));
     }
 
     private void mag_compararNot(){
         Object A = pila.pop();
         Object B = pila.pop();
-        if((A instanceof Matriz) && (B instanceof Matriz))
-            pila.push( !((Matriz)A).comparar((Matriz)B) );
+        if((A instanceof Complejo) && (B instanceof Complejo))
+            pila.push( !((Complejo)A).mag_comparaNot((Complejo)B) );
         else
-            pila.push((double)A!=(double)B);
+            pila.push((double)A != (double)B);
     }
 
     private void menor(){
@@ -147,11 +159,11 @@ public class MaquinaDePila {
         double b;
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
-        if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = ((Matriz)A).sumaDeComponentes();
-            b = ((Matriz)B).sumaDeComponentes();
+        if((A instanceof Complejo) && (B instanceof Complejo)){
+            a = ((Complejo)A).magnitud();
+            b = ((Complejo)B).magnitud();
         }            
-        else{
+        else {
             a = (double)A;
             b = (double)B;
         }
@@ -163,9 +175,9 @@ public class MaquinaDePila {
         double b;
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
-        if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = ((Matriz)A).sumaDeComponentes();
-            b = ((Matriz)B).sumaDeComponentes();
+        if((A instanceof Complejo) && (B instanceof Complejo)){
+            a = ((Complejo)A).magnitud();
+            b = ((Complejo)B).magnitud();
         }            
         else{
             a = (double)A;
@@ -179,9 +191,9 @@ public class MaquinaDePila {
         double b;
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
-        if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = ((Matriz)A).sumaDeComponentes();
-            b = ((Matriz)B).sumaDeComponentes();
+        if((A instanceof Complejo) && (B instanceof Complejo)){
+            a = ((Complejo)A).magnitud();
+            b = ((Complejo)B).magnitud();
         }            
         else{
             a = (double)A;
@@ -195,9 +207,9 @@ public class MaquinaDePila {
         double b;
         Object B = pila.pop();
         Object A = pila.pop(); //Se sacan en orden inverso por la forma de la pila
-        if((A instanceof Matriz) && (B instanceof Matriz)){
-            a = ((Matriz)A).sumaDeComponentes();
-            b = ((Matriz)B).sumaDeComponentes();
+        if((A instanceof Complejo) && (B instanceof Complejo)){
+            a = ((Complejo)A).magnitud();
+            b = ((Complejo)B).magnitud();
         }            
         else{
             a = (double)A;
@@ -380,21 +392,11 @@ public class MaquinaDePila {
 
     }
 
-    public static class Invertir implements Funcion{
-
-        @Override
-        public Object ejecutar(Object A) {
-            Matriz invertida = ((Matriz)A).invierte();
-            return invertida;
-        }
-        
-    }
-
     public static class Sumar implements Funcion{
 
         @Override
         public Object ejecutar(Object A) {
-            return ((Matriz)A).sumaDeComponentes();
+            return ((Complejo)A).magnitud();
         }
         
     }

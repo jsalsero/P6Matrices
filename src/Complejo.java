@@ -12,6 +12,16 @@ public class Complejo {
         im = b;
     }
     
+    @Override
+    public String toString() {
+        String cad = "";
+        cad += real;
+        if (im >= 0) cad += " + " + im;
+        else cad += " - " + (-im);
+        cad += "i\n";
+        return cad;
+    }
+    
     public double getR() {
         return real;
     }
@@ -19,6 +29,25 @@ public class Complejo {
     public double getI() {
         return im;
     }
+    
+    public boolean compara(Complejo z) {
+        if (real == z.getR() && im == z.getI()) return true;
+        return false;
+    }
+    
+    public boolean comparaNot(Complejo z) {
+        if (real != z.getR() || im != z.getI()) return true;
+        return false;
+    }
+    
+    public boolean mag_compara(Complejo z) {
+        if (magnitud() == z.magnitud()) return true;
+        return false;
+    }
+    
+    public boolean mag_comparaNot(Complejo z) {
+        return !mag_compara(z);
+    }    
     
     Complejo suma(Complejo z) {
         return new Complejo(real + z.getR(), im + z.getI());
@@ -32,7 +61,7 @@ public class Complejo {
         return new Complejo(real * z.getR() - im * z.getI(), real * z.getI() + im * z.getR());
     }
     
-    Complejo divicion(Complejo z) {
+    Complejo division(Complejo z) {
         if (z.real == 0 && z.im == 0) {
             System.out.println("ERROR: DIVISION ENTRE CERO\n");
             return z;
