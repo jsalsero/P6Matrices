@@ -88,8 +88,9 @@ public class MaquinaDePila {
     }
     
     private void restar(){
-         Object com1 = pila.pop();
+        System.out.println("resta");
         Object com2 = pila.pop();
+        Object com1 = pila.pop();
         if(com1 instanceof Complejo && com2 instanceof Complejo)
             pila.push( ((Complejo)com1).resta((Complejo)com2) );
         else 
@@ -97,7 +98,6 @@ public class MaquinaDePila {
     }
     
     private void imag() {
-        System.out.println("imag");
         Object com1 = pila.pop();
         if (com1 instanceof Complejo) {
             System.out.println(((Complejo) com1).multiplicacion(new Complejo(0, 1)));
@@ -106,7 +106,11 @@ public class MaquinaDePila {
     }
     
     private void unaryminus() {
-        
+        System.out.println("unaryminus");
+        Object com1 = pila.pop();
+        if (com1 instanceof Complejo)
+            com1 = new Complejo().resta((Complejo)com1);
+        pila.push(com1);
     }
     
     private void multiplicar(){
@@ -155,6 +159,7 @@ public class MaquinaDePila {
     }
 
     private void menor(){
+        System.out.println("menor");
         double a;
         double b;
         Object B = pila.pop();
